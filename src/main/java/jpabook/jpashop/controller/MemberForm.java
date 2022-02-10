@@ -3,7 +3,6 @@ package jpabook.jpashop.controller;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.GeneratedValue;
 import javax.validation.constraints.NotEmpty;
 
 @Getter @Setter
