@@ -29,11 +29,11 @@ public class ItemController {
     public String create(BookForm form) {
 
         Book book = new Book();
-        book.setName(book.getName());
-        book.setPrice(book.getPrice());
-        book.setStockQuantity(book.getStockQuantity());
-        book.setAutor(book.getAutor());
-        book.setIsbn(book.getIsbn());
+        book.setName(form.getName());
+        book.setPrice(form.getPrice());
+        book.setStockQuantity(form.getStockQuantity());
+        book.setAutor(form.getAuthor());
+        book.setIsbn(form.getIsbn());
 
         itemService.saveItem(book);
         return "redirect:/items";
