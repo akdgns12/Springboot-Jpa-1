@@ -51,7 +51,7 @@ public class ItemController {
     }
 
     /**
-     * 상품 수정
+     * 상품 수정, 권장 코드(엔티티를 변경할 때는 항상 변경김지를 사용해라)
      */
     @GetMapping("/items/{itemId}/edit")
     public String updateItemForm(@PathVariable("itemId") Long itemId, Model model) {
@@ -73,15 +73,17 @@ public class ItemController {
     @PostMapping("/items/{itemsId}/edit")
     public String updateItem(@ModelAttribute("form") BookForm form) {
 
-        Book book = new Book();
-        book.setId(form.getId());
-        book.setName(form.getName());
-        book.setPrice(form.getPrice());
-        book.setStockQuantity(form.getStockQuantity());
-        book.setAutor(form.getAuthor());
-        book.setIsbn(form.getIsbn());
+//        Book book = new Book();
+//        book.setId(form.getId());
+//        book.setName(form.getName());
+//        book.setPrice(form.getPrice());
+//        book.setStockQuantity(form.getStockQuantity());
+//        book.setAutor(form.getAuthor());
+//        book.setIsbn(form.getIsbn());
 
-        itemService.saveItem(book);
+//        itemService.saveItem(book);
+
+        itemService.updateItem(form.getId(), form.getName(), form.getPrice());
         return "redirect:/items";
     }
 
