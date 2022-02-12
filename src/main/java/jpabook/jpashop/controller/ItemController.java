@@ -33,7 +33,7 @@ public class ItemController {
         book.setName(form.getName());
         book.setPrice(form.getPrice());
         book.setStockQuantity(form.getStockQuantity());
-        book.setAutor(form.getAuthor());
+        book.setAuthor(form.getAuthor());
         book.setIsbn(form.getIsbn());
 
         itemService.saveItem(book);
@@ -63,7 +63,7 @@ public class ItemController {
         form.setName(item.getName());
         form.setPrice(item.getPrice());
         form.setStockQuantity(item.getStockQuantity());
-        form.setAuthor(item.getAutor());
+        form.setAuthor(item.getAuthor());
         form.setIsbn(item.getIsbn());
 
         model.addAttribute("form", form);
