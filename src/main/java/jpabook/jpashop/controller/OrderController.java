@@ -3,15 +3,15 @@ package jpabook.jpashop.controller;
 import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.domain.Order;
 import jpabook.jpashop.domain.item.Item;
+import jpabook.jpashop.repository.OrderSearch;
 import jpabook.jpashop.service.ItemService;
 import jpabook.jpashop.service.MemberService;
 import jpabook.jpashop.service.OrderService;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,6 +23,9 @@ public class OrderController {
     private final MemberService memberService;
     private final ItemService itemService;
 
+    /**
+     * 상품 주문 컨트롤러
+     */
     @GetMapping("/order")
     public String createForm(Model model) {
 
@@ -36,11 +39,34 @@ public class OrderController {
     }
 
     @PostMapping("/order")
-    public String create(@RequestParam("memeberId") Long memberId,
+    public String create(@RequestParam("memberId") Long memberId,
                          @RequestParam("itemId") Long itemId,
                          @RequestParam("count") int count) {
 
         orderService.order(memberId, itemId, count);
+        return "redirect:/orders";
+    }
+
+    /**
+     * 상품 목록 검색
+     */
+    @GetMapping("/orders")
+    public String orderList(@ModelAttribute("orderSearch") OrderSearch orderSearch, Model model) {
+
+        List<Order> orders = orderService.findOrders(orderSearch);
+        model.addAttribute("orders", orders);
+
+        return "order/orderList";
+    }
+
+    /**
+     * 상품 주문 취소
+     */
+    @PostMapping("/orders/{orderId}/cancel")
+    public String cancelOrder(@PathVariable("orderId") Long orderId) {
+
+        orderService.cancelOrder(orderId);
+
         return "redirect:/orders";
     }
 }
